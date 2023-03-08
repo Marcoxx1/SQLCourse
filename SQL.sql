@@ -20,6 +20,9 @@ ALTER TABLE employees ADD extension INT;
 
 select*from employees;
 
+SELECT employeeNumber,
+email, concat_ws('_',firstName,LastName) as 'Nombre completo'
+FROM employees;
 INSERT INTO `employees`(`id`,`employeeNumber`,`lastName`,`firstName`,`email`,`officeCode`,`jobTitle`)
 VALUES
 (1,1001,"Lopez","Marco","marcoxx1@hotmail.com","1","President"),
@@ -43,3 +46,52 @@ FROM products;
 
 SELECT concat(lastName," ",firstName)
 FROM employees;
+
+SELECT * FROM employees;
+
+SELECT *
+FROM employees
+WHERE employeeNumber > 1200;
+
+SELECT *
+FROM employees
+WHERE employeeNumber = 1611;
+
+SELECT * 
+FROM employees
+WHERE jobTitle = 'Sales Rep' AND officeCode = 1;
+
+SELECT * 
+FROM employees
+WHERE jobTitle = 'Sales Rep' AND officeCode != 1;
+
+SELECT employeeNumber AS 'Numero de empleado', concat_ws('_',lastName,firstName) AS 'Empleado' 
+FROM employees
+WHERE employeeNumber > 1000 AND employeeNumber <= 2000;
+
+SELECT *
+FROM employees
+WHERE jobTitle='Sales Rep' AND reportsTo=1143;
+
+SELECT *
+FROM employees
+WHERE reportsTo=1002 AND firstName!='Jeff';
+
+/*Selecciona todos los empleados que esten en 2 y 3*/
+SELECT officeCode,employeeNumber,lastName,firstName
+FROM employees
+WHERE employees.officeCode in (2,3);
+
+/*Selecciona nombres que empiecen por S*/
+SELECT officeCode,employeeNumber,lastName,firstName
+FROM employees
+WHERE firstName LIKE '%S%';
+
+/*Esta expresion es incorrecta*/
+SELECT officeCode,employeeNumber,lastName,firstName
+FROM employees
+WHERE reportsTo = NULL;
+
+SELECT officeCode,employeeNumber,lastName,firstName
+FROM employees
+WHERE reportsTo IS NULL;
