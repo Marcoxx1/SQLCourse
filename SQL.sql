@@ -95,3 +95,42 @@ WHERE reportsTo = NULL;
 SELECT officeCode,employeeNumber,lastName,firstName
 FROM employees
 WHERE reportsTo IS NULL;
+
+SELECT * 
+FROM employees
+WHERE reportsTo = 1143
+ORDER BY lastName;
+
+SELECT employeeNumber, concat_ws('_',lastName,firstName) AS 'Nombre completo', jobTitle AS 'Area de trabajo'
+FROM employees
+WHERE jobTitle = 'Sales Rep'
+ORDER BY employeeNumber;
+
+SELECT * 
+FROM employees
+WHERE reportsTo = 1143
+ORDER BY lastName desc;
+
+/*Selecciona el codigo */
+SELECT MAX(officeCode) AS 'Oficina mayor'
+FROM employees;
+SELECT officeCode AS 'Oficina mayor'
+FROM employees
+ORDER BY officeCode desc;
+
+select COUNT(*)
+FROM employees;
+
+select COUNT(*)
+FROM employees
+WHERE reportsTo = 1143;
+
+SELECT COUNT(DISTINCT officeCode) FROM employees;
+
+SELECT * 
+FROM employees
+ORDER BY officeCode;
+
+SELECT officeCode,COUNT(employeeNumber)
+FROM employees
+GROUP BY officeCode;
