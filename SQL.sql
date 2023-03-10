@@ -131,6 +131,60 @@ SELECT *
 FROM employees
 ORDER BY officeCode;
 
-SELECT officeCode,COUNT(employeeNumber)
+SELECT officeCode,COUNT(employeeNumber) AS 'Cantidad_de_empleados'
 FROM employees
-GROUP BY officeCode;
+GROUP BY officeCode
+ORDER BY Cantidad_de_empleados;
+
+USE classicmodels;
+
+SELECT jobTitle,COUNT(jobTitle) AS 'Cantidad'
+FROM employees
+GROUP BY jobTitle
+ORDER BY Cantidad DESC;
+
+SELECT reportsTo,COUNT(reportsTo)
+FROM employees
+GROUP BY reportsTo;
+
+SELECT ROUND(8.5);
+
+SELECT CONCAT_WS(' ',UPPER(lastName),UPPER(firstName)) AS 'Nombre Completo'
+FROM employees;
+
+SELECT '     5 ESPACIOS';
+SELECT LTRIM('     5 ESPACIOS');
+
+SELECT '5 ESPACIOS     ';
+SELECT RTRIM('5 ESPACIOS     ');
+
+SELECT '     5 ESPACIOS     ';
+SELECT TRIM('     5 ESPACIOS     ');
+
+SELECT TRIM('N' FROM 'NNODE JS N');
+
+
+SELECT NOW();
+
+SELECT CURRENT_DATE(),CURDATE();
+
+SELECT CURRENT_TIME(),CURTIME();
+
+SELECT firstName,
+	CASE officeCode WHEN 1 THEN 'PISO 1'
+		WHEN 2 THEN 'PISO 2'
+		WHEN 3 THEN 'PISO 3'
+		ELSE 'PLANTA BAJA'
+	END AS 'UBICACION'
+FROM employees;
+
+SELECT *
+FROM PRODUCTS;
+
+SELECT productName,
+	CASE  WHEN quantityInStock < 1000 THEN 'URGE REALIZAR PEDIDO'
+		WHEN quantityInStock > 1000 AND quantityInStock < 2000 THEN 'REALIZAR PEDIDO ESTA SEMANA'
+        ELSE 'EN STOCK'
+        END AS 'STOCK'
+FROM PRODUCTS
+ORDER BY quantityInStock;
