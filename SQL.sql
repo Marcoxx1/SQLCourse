@@ -188,3 +188,20 @@ SELECT productName,
         END AS 'STOCK'
 FROM PRODUCTS
 ORDER BY quantityInStock;
+
+/*Regresa los empleados con sus oficinas*/
+SELECT * FROM employees
+INNER JOIN offices
+	ON employees.officeCode = offices.officeCode;
+    
+    /*Regresa los empleados con sus oficinas ALIAS*/
+SELECT * FROM employees e
+INNER JOIN offices o
+	ON e.officeCode = o.officeCode;
+    
+/*JOINS ANIDADOS*/
+SELECT * FROM employees e
+INNER JOIN offices o
+	ON e.officeCode = o.officeCode
+INNER JOIN customers c
+	ON e.employeeNumber = c.salesRepEmployeeNumber;
