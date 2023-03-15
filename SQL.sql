@@ -205,3 +205,64 @@ INNER JOIN offices o
 	ON e.officeCode = o.officeCode
 INNER JOIN customers c
 	ON e.employeeNumber = c.salesRepEmployeeNumber;
+    
+USE classicmodels;
+    
+SELECT * FROM customers;
+    
+SELECT * FROM employees e
+INNER JOIN customers c
+    ON e.employeeNumber = c.salesRepEmployeeNumber
+WHERE employeeNumber = 1165;
+    
+SELECT CONCAT_WS(' ',e.lastName,e.firstName) AS employee,
+c.customerName
+FROM employees e
+INNER JOIN customers c
+    ON e.employeeNumber = c.salesRepEmployeeNumber
+WHERE employeeNumber = 1165
+ORDER BY e.lastName;
+    
+SELECT * FROM customers c
+INNER JOIN employees e
+    ON c.salesRepEmployeeNumber = e.employeeNumber
+WHERE country = 'USA'
+ORDER BY c.customerName;
+
+SELECT * FROM offices o
+INNER JOIN employees e
+	ON o.officeCode = e.officeCode
+WHERE o.country = 'FRANCE';
+
+/*USO DE LEFT*/
+SELECT * FROM employees e
+LEFT JOIN customers c
+	ON e.employeeNumber = c.salesRepEmployeeNumber
+WHERE c.customerNumber IS NULL;
+    
+    /*ES POSIBLE CONSULTAR LOS EMPLEADOS QUE NO ATIENDEN CLIENTES*/
+SELECT * FROM employees e
+left join customers c
+    ON e.employeeNumber;
+    
+    /*CONSULTAR LOS EMPLEADOS QUE REPORTAN AL PRESIDENTE*/
+SELECT * FROM employees
+WHERE reportsTo = (SELECT employeeNumber
+FROM employees
+WHERE jobTitle = 'President');
+    
+SELECT employeeNumber, CONCAT_WS(' ',firstName,lastName) AS Nombre_Completo
+FROM employees
+WHERE employeeNumber >= (SELECT employeeNumber
+FROM employees
+WHERE firstName = 'Leslie' AND lastName = 'Thompson');
+
+DELIMITER $$
+CREATE PROCEDURE obtenerEmpleado(IN p_employee_number VARCHAR(255))
+BEGIN
+	SELECT *
+    FROM employees
+    WHERE employeeNumber = p_employee_number;
+END$$
+
+CALL obtenerEmpleado(1002);
